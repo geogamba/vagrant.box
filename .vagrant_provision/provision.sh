@@ -10,9 +10,10 @@ echo '=== Updating ubuntu packages ==='
 apt-get update
 
 echo '=== Install Apache2 & Apache2-Utils ==='
-#apt-get install -y apache2 apache2-utils libapache2-mod-php7.0
-apt-get install -y apache2 apache2-utils
+export DEBIAN_FRONTEND=noninteractive
+apt-get install -y apache2 apache2-utils libapache2-mod-php7.0
 
+mkdir -p /vagrant/public_html
 
 echo "ServerName localhost" > "/etc/apache2/conf-available/fqdn.conf"
 a2enmod rewrite
