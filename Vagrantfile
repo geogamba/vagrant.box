@@ -1,9 +1,9 @@
-# Vagrant Box - https://atlas.hashicorp.com/laravel/boxes/homestead/versions/0.5.0
+# Vagrant Box - https://atlas.hashicorp.com/laravel/boxes/homestead/versions/1.0.1
 
 Vagrant.configure("2") do |config|
   config.vm.box = "laravel/homestead"
   config.vm.box_check_update = false
-  config.vm.box_version= "0.5.0"
+  config.vm.box_version= "1.0.1"
   config.vm.network "forwarded_port", guest: 80, host: 8000
   config.vm.network "forwarded_port", guest: 443, host: 44300
   config.vm.network "forwarded_port", guest: 3306, host: 33060

@@ -9,9 +9,13 @@ service nginx stop
 echo '=== Updating ubuntu packages ==='
 apt-get update
 
-echo '=== Install Apache2 & Apache2-Utils ==='
 export DEBIAN_FRONTEND=noninteractive
-apt-get install -y apache2 apache2-utils libapache2-mod-php7.0
+
+echo 'Remove existing PHP installs. We reinstall it later.'
+apt-get purge php*
+
+echo '=== Install Apache2 & Apache2-Utils ==='
+apt-get install -y apache2 apache2-utils php7.1-mysql php7.1-curl php7.1-json php7.1-cgi php7.1 php7.1-common libapache2-mod-php7.1
 
 mkdir -p /vagrant/public_html
 
@@ -30,3 +34,5 @@ echo '=== Adding mysql global user vagrant:vagrant ===';
 mysql -u root -e "CREATE USER 'vagrant'@'%' IDENTIFIED BY 'vagrant'; GRANT ALL PRIVILEGES ON *.* TO 'vagrant'@'%' WITH GRANT OPTION; FLUSH PRIVILEGES;" mysql
 
 echo '=== END Provisioner ==='
+
+echo 'Do NOT forget to edit /etc/php/7.1/apache2/php.ini and comment out your PHP modules'
