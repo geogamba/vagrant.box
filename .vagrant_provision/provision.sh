@@ -11,17 +11,17 @@ apt-get update
 
 export DEBIAN_FRONTEND=noninteractive
 
-echo 'Remove existing PHP installs. We reinstall it later.'
+echo '=== Remove existing PHP installs. We reinstall it later.'
 apt-get purge php*
 
 echo '=== Install Apache2 & Apache2-Utils ==='
 apt-get install -y apache2 apache2-utils php7.1-mysql php7.1-curl php7.1-json php7.1-cgi php7.1 php7.1-common libapache2-mod-php7.1
 
-mkdir -p /vagrant/public_html
+mkdir -p /home/vagrant/public_html
 
 echo "ServerName localhost" > "/etc/apache2/conf-available/fqdn.conf"
 a2enmod rewrite
-cp /vagrant/.vagrant_provision/site-vagrant.conf /etc/apache2/sites-available/site-vagrant.conf
+cp /home/vagrant/.vagrant_provision/site-vagrant.conf /etc/apache2/sites-available/site-vagrant.conf
 a2dissite 000-default.conf
 a2ensite site-vagrant.conf
 
@@ -35,4 +35,4 @@ mysql -u root -e "CREATE USER 'vagrant'@'%' IDENTIFIED BY 'vagrant'; GRANT ALL P
 
 echo '=== END Provisioner ==='
 
-echo 'Do NOT forget to edit /etc/php/7.1/apache2/php.ini and comment out your PHP modules'
+echo '=== Do NOT forget to edit /etc/php/7.1/apache2/php.ini and comment out your PHP modules'
