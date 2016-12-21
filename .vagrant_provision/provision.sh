@@ -15,7 +15,7 @@ echo '=== Remove existing PHP installs. We reinstall it later.'
 apt-get purge php*
 
 echo '=== Install Apache2 & Apache2-Utils ==='
-apt-get install -y aptitude apache2 apache2-utils php7.1-mysql php7.1-curl php7.1-json php7.1-cgi php7.1 php7.1-common libapache2-mod-php7.1
+apt-get install -y aptitude composer apache2 apache2-utils php7.1-mysql php7.1-curl php7.1-json php7.1-cgi php7.1 php7.1-common libapache2-mod-php7.1
 
 mkdir -p /vagrant/public_html
 
@@ -33,8 +33,8 @@ service apache2 restart
 echo '=== Adding mysql global user vagrant:vagrant ===';
 mysql -u root -e "CREATE USER 'vagrant'@'%' IDENTIFIED BY 'vagrant'; GRANT ALL PRIVILEGES ON *.* TO 'vagrant'@'%' WITH GRANT OPTION; FLUSH PRIVILEGES;" mysql
 
-echo '=== Setting PATH for /.composer/vendor/bin'
-#export PATH=$PATH:/home/vagrant/.composer/vendor/bin;
+echo '=== Install composer packages'
+runuser -u vagrant composer global require consolidation/robo henrikbjorn/lurker natxet/CssMin patchwork/jsqueeze leafo/scssphp
 
 echo '=== END Provisioner ==='
 
