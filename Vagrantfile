@@ -11,7 +11,7 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 443, host: 44300
   config.vm.network "forwarded_port", guest: 587, host: 58700
   config.vm.network "forwarded_port", guest: 3306, host: 33060
-  config.vm.synced_folder ".", "/home/vagrant"
+  config.vm.synced_folder ".", "/vagrant"
   
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
